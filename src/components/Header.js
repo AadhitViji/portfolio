@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
-export default function Header({ name, links, theme, onToggleTheme }) {
+export default function Header({ name, links, theme, onToggleTheme, onOpenContact }) {
   const location = useLocation();
   const navigate = useNavigate();
   const isResume = location.pathname.startsWith('/resume');
@@ -47,6 +47,7 @@ export default function Header({ name, links, theme, onToggleTheme }) {
             <Link className="btn small" to="/resume">Resume</Link>
             <a className="btn small outline" href={links.github} target="_blank" rel="noreferrer">GitHub</a>
             <a className="btn small outline" href={links.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
+            <button type="button" className="btn small" onClick={onOpenContact} aria-label="Open contact dialog">Contact</button>
             <button
               type="button"
               className="btn small outline"

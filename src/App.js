@@ -2,6 +2,7 @@ import './App.css';
 import { profile } from './data';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import ContactModal from './components/ContactModal';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Home from './pages/Home';
 import ResumePage from './pages/ResumePage';
@@ -16,6 +17,15 @@ function App() {
   };
 
   const [theme, setTheme] = useState(getInitialTheme);
+  const [contactOpen, setContactOpen] = useState(false);
+
+  useEffect(() => {
+    try {
+      if ('scrollRestoration' in window.history) {
+        window.history.scrollRestoration = 'manual';
+      }
+    } catch {}
+  }, []);
 
   useEffect(() => {
     const root = document.documentElement;
@@ -37,7 +47,7 @@ function App() {
         const el = document.getElementById(id);
         if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
       } else {
-        window.scrollTo({ top: 0, behavior: 'instant' });
+        window.scrollTo({ top: 0, behavior: 'auto' });
       }
     }, [location.pathname, location.hash]);
     return null;
@@ -47,11 +57,12 @@ function App() {
     <BrowserRouter>
       <ScrollToHash />
       <div className="site">
-        <Header name={profile.name} links={profile.links} theme={theme} onToggleTheme={toggleTheme} />
+        <Header name={profile.name} links={profile.links} theme={theme} onToggleTheme={toggleTheme} onOpenContact={() => setContactOpen(true)} />
         <Routes>
           <Route path="/" element={<Home theme={theme} />} />
           <Route path="/resume" element={<ResumePage theme={theme} />} />
         </Routes>
+        <ContactModal open={contactOpen} onClose={() => setContactOpen(false)} profile={profile} />
         <Footer email={profile.email} phone={profile.phone} location={profile.location} />
       </div>
     </BrowserRouter>
