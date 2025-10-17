@@ -2,10 +2,11 @@ import React, { useEffect, useRef } from "react";
 
 // Colorful liquid-like field that reacts to the mouse and fades away over time
 export default function FluidField({
-  colors = ["#ff6b6b", "#ffd93d", "#6bcBef", "#b46bff", "#6bea9a"],
-  fade = 0.06, // global fade each frame (higher = quicker disappearance)
-  spawnRate = 1, // drops per mousemove event
-  maxRadius = 90,
+  colors = ["#7c3aed", "#22d3ee", "#f472b6", "#a3e635", "#60a5fa"],
+  fade = 0.045, // global fade each frame (higher = quicker disappearance)
+  spawnRate = 2, // drops per mousemove event
+  maxRadius = 120,
+  backgroundTint = "rgba(8,12,20,0.06)", // darken behind blobs to avoid white look
 }) {
   const canvasRef = useRef(null);
   const mouseRef = useRef({ x: -9999, y: -9999, inside: false });
@@ -19,8 +20,14 @@ export default function FluidField({
 
     const resize = () => {
       const parent = canvas.parentElement;
-      canvas.width = parent.clientWidth;
-      canvas.height = Math.max(260, parent.clientHeight);
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const w = parent.clientWidth;
+      const h = Math.max(260, parent.clientHeight);
+      canvas.width = Math.floor(w * dpr);
+      canvas.height = Math.floor(h * dpr);
+      canvas.style.width = w + "px";
+      canvas.style.height = h + "px";
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     };
 
     const addDrops = (x, y) => {
@@ -39,23 +46,28 @@ export default function FluidField({
 
     const step = () => {
       const { width, height } = canvas;
-      // global fade to create dissipating effect
-      ctx.fillStyle = `rgba(0,0,0,${fade})`;
+      // 1) fade previous frame to create dissipating effect
       ctx.globalCompositeOperation = "destination-out";
+      ctx.fillStyle = `rgba(0,0,0,${fade})`;
       ctx.fillRect(0, 0, width, height);
-      ctx.globalCompositeOperation = "lighter"; // additive blending for vivid colors
+      // 2) apply subtle dark tint so white background doesn't overpower
+      ctx.globalCompositeOperation = "source-over";
+      ctx.fillStyle = backgroundTint;
+      ctx.fillRect(0, 0, width, height);
+      // 3) draw blobs with additive blending for vibrancy
+      ctx.globalCompositeOperation = "lighter";
 
       // update and draw drops
       for (let i = dropsRef.current.length - 1; i >= 0; i--) {
         const d = dropsRef.current[i];
         d.r = Math.min(maxRadius, d.r + d.grow);
-        d.life -= 0.008 + d.r / (maxRadius * 100); // slower fade for small, faster for big
+        d.life -= 0.007 + d.r / (maxRadius * 120); // slower fade for small, faster for big
         if (d.life <= 0) {
           dropsRef.current.splice(i, 1);
           continue;
         }
-        const grd = ctx.createRadialGradient(d.x, d.y, d.r * 0.1, d.x, d.y, d.r);
-        grd.addColorStop(0, hexToRgba(d.color, 0.6 * d.life));
+        const grd = ctx.createRadialGradient(d.x, d.y, d.r * 0.12, d.x, d.y, d.r);
+        grd.addColorStop(0, hexToRgba(d.color, 0.75 * d.life));
         grd.addColorStop(1, hexToRgba(d.color, 0));
         ctx.fillStyle = grd;
         ctx.beginPath();

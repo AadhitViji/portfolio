@@ -48,6 +48,17 @@
   --pill: #1a2330;
 }
 
+/* Light theme overrides (applied when html has class .theme-light) */
+.theme-light {
+  --bg: #f7f9fc;
+  --card: #ffffff;
+  --text: #0b0f14;
+  --muted: #4b5563;
+  --brand: #2563eb;
+  --border: #e5e7eb;
+  --pill: #f1f5f9;
+}
+
 html, body, #root, .site { height: 100%; }
 
 body { background: var(--bg); color: var(--text); }
@@ -60,6 +71,7 @@ body { background: var(--bg); color: var(--text); }
   display: flex; align-items: center; justify-content: space-between; gap: 16px;
   padding: 14px 20px;
 }
+.theme-light .site-header { background: rgba(255, 255, 255, 0.6); }
 .site-header .brand { color: var(--text); font-weight: 700; text-decoration: none; letter-spacing: 0.2px; }
 .site-header .nav { display: flex; gap: 14px; flex-wrap: wrap; }
 .site-header .nav a { color: var(--muted); text-decoration: none; font-size: 14px; }
@@ -76,7 +88,11 @@ body { background: var(--bg); color: var(--text); }
 .btn:hover { opacity: 0.9; }
 
 .section { padding: 52px 0; border-bottom: 1px solid var(--border); position: relative; overflow: hidden; }
+.section > .container { position: relative; z-index: 1; }
 .section-title { font-size: 24px; margin: 0 0 20px; }
+
+/* Force Projects section to pure white in light mode */
+.theme-light #projects.section { background: #ffffff; }
 
 .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
 .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 16px; }
@@ -107,3 +123,11 @@ body { background: var(--bg); color: var(--text); }
 .hero-inner { position: relative; z-index: 1; }
 .net-wrap { position: absolute; inset: 0; }
 .net-canvas { width: 100%; height: 100%; display: block; pointer-events: none; }
+
+/* Gooey blobs (SVG filter) */
+.goo-hooks { position: absolute; inset: 0; }
+.goo-filter { position: absolute; inset: 0; filter: url(#goo); pointer-events: none; }
+.goo-b { position: absolute; left: 0; top: 0; border-radius: 50%; pointer-events: none; will-change: transform; }
+.goo-b1 { opacity: 0.9; }
+.goo-b2 { opacity: 0.8; }
+.goo-b3 { opacity: 0.75; }
