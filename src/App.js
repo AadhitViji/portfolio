@@ -10,6 +10,7 @@ import Skills from './components/Skills';
 import Footer from './components/Footer';
 import FluidField from './components/FluidField';
 import FluidSim from './components/FluidSim';
+import CursorAura from './components/CursorAura';
 import GooeyBlob from './components/GooeyBlob';
 import { useEffect, useState } from 'react';
 
@@ -75,11 +76,11 @@ function App() {
           <Projects items={projects} />
         </Section>
 
-        <Section id="experience" title="Achievements / Qualifications">
+        <Section id="experience" title="Achievements / Qualifications" bg={<CursorAura theme={theme} trail={14} size={240} ease={0.2} lagFactor={0.72} /> }>
           <Experience items={achievements} />
         </Section>
 
-        <Section id="education" title="Education">
+        <Section id="education" title="Education" bg={<FluidField colors={["#7c3aed", "#22d3ee", "#60a5fa"]} fade={0.05} spawnRate={1} maxRadius={110} /> }>
           <Education items={education} />
         </Section>
 
