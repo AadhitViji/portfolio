@@ -8,6 +8,7 @@ import Experience from './components/Experience';
 import Education from './components/Education';
 import Skills from './components/Skills';
 import Footer from './components/Footer';
+import FluidField from './components/FluidField';
 
 function App() {
   return (
@@ -23,7 +24,7 @@ function App() {
           <p>{profile.summary}</p>
         </Section>
 
-        <Section id="projects" title="Projects">
+        <Section id="projects" title="Projects" bg={<FluidField /> }>
           <Projects items={projects} />
         </Section>
 
