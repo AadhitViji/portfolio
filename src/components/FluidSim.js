@@ -279,6 +279,23 @@ export default function FluidSim({
     };
     seed();
     window.addEventListener("resize", resize);
+    // Reseed whenever canvas becomes visible again (e.g., navigating back to section)
+    const io = new IntersectionObserver((entries) => {
+      for (const ent of entries) {
+        if (ent.isIntersecting) {
+          // strong reseed to make the effect appear instantly
+          for (let k = 0; k < 2; k++) seed();
+        }
+      }
+    }, { threshold: 0.2 });
+    io.observe(canvas);
+    // Reseed when hash navigates to #projects
+    const onHash = () => {
+      if (window.location.hash.toLowerCase().includes('projects')) {
+        seed();
+      }
+    };
+    window.addEventListener('hashchange', onHash);
     window.addEventListener("mousemove", onMove);
     window.addEventListener("touchmove", onTouch, { passive: true });
     step();
@@ -286,6 +303,8 @@ export default function FluidSim({
     return () => {
       cancelAnimationFrame(rafRef.current);
       window.removeEventListener("resize", resize);
+      window.removeEventListener('hashchange', onHash);
+      try { io.disconnect(); } catch {}
       window.removeEventListener("mousemove", onMove);
       window.removeEventListener("touchmove", onTouch);
     };

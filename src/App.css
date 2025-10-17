@@ -61,12 +61,12 @@
 
 html, body, #root, .site { height: 100%; }
 
-body { background: var(--bg); color: var(--text); }
+body { background: var(--bg); color: var(--text); padding-top: 62px; }
 
 .container { max-width: 1040px; margin: 0 auto; padding: 0 20px; }
 
 .site-header {
-  position: sticky; top: 0; z-index: 10; backdrop-filter: blur(8px);
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000; backdrop-filter: blur(8px);
   background: rgba(11, 15, 20, 0.6); border-bottom: 1px solid var(--border);
   display: flex; align-items: center; justify-content: space-between; gap: 16px;
   padding: 14px 20px;
@@ -117,6 +117,16 @@ body { background: var(--bg); color: var(--text); }
 .btn.small { padding: 8px 10px; font-size: 13px; }
 .pill.small { font-size: 12px; padding: 4px 8px; }
 .pill-ico { margin-right: 6px; }
+
+/* Footer mouse parallax background */
+.site-footer { position: relative; overflow: hidden; }
+.footer-parallax {
+  position: absolute; inset: 0; pointer-events: none; transition: transform 0.1s linear;
+  background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1500&q=80') center/cover no-repeat;
+  opacity: 0.5;
+  filter: saturate(0.9) brightness(0.7);
+}
+.theme-light .footer-parallax { filter: saturate(0.9) brightness(0.95); opacity: 0.6; }
 
 /* Dot network background */
 .net-bg { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
