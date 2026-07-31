@@ -40,8 +40,8 @@ export const education = [
 
 export const skills = {
   languages: ["Python", "C", "C++", "HTML", "JavaScript", "SQL", "TypeScript"],
-  frameworks: ["Microsoft .NET", "Bootstrap", "Express", "React"],
-  other: ["MongoDB", "CSS", "Node.js", "UI/UX", "Firebase", "Windsurf", "Git/GitHub"],
+  frameworks: ["Microsoft .NET", "Bootstrap", "Express", "React", "Three.js", "TensorFlow"],
+  other: ["MongoDB", "CSS", "Node.js", "UI/UX", "Firebase", "Windsurf", "Git/GitHub", "Swagger"],
 };
 
 export const projects = [
