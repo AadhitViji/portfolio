@@ -51,7 +51,7 @@ export const projects = [
     stack: ["React (TS)", "Vite", "Tailwind", "Firebase", "OpenAI", "Node.js", "Express"],
     summary:
       "Multi‑tenant commerce & GenAI platform with dashboards, admin, real‑time chat, and AI‑assisted workflows.",
-    demo: "",
+    demo: "https://ewsells.com/",
     repo: "",
   },
   {
@@ -61,7 +61,7 @@ export const projects = [
     summary:
       "Online platform where users share and explore cooking recipes with admin support.",
     demo: "",
-    repo: "",
+    repo: "https://github.com/AadhitViji/Recipe-Sharing-Platform",
   },
   {
     title: "Car Pooling Web App",
@@ -70,7 +70,7 @@ export const projects = [
     summary:
       "Digital platform to facilitate ride sharing among people traveling in the same direction.",
     demo: "",
-    repo: "",
+    repo: "https://github.com/AadhitViji/CarPooling",
   },
   {
     title: "Sun Tracking Solar Panel using ESP32",
@@ -84,6 +84,17 @@ export const projects = [
 ];
 
 export const achievements = [
+  {
+    title: "Frontend Developer",
+    org: "FRSHAR Cosmos Private Limited",
+    period: "Oct 2025 – Present",
+    type: "Professional",
+    bullets: [
+      "Developing responsive web applications using React, JavaScript, and modern CSS frameworks.",
+      "Building interactive user interfaces with smooth animations and optimal user experience.",
+      "Implementing real-time features and integrating with various APIs and backend services.",
+    ],
+  },
   {
     title: "Developer Intern",
     org: "Expectation Walkers GenAI Research and Services Pvt. Ltd.",
