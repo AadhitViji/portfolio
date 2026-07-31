@@ -132,7 +132,7 @@ export default function CursorAura({
       window.removeEventListener("mousemove", onMove);
       window.removeEventListener("mouseout", onLeave);
     };
-  }, [ease, lagFactor, size, theme, trail]);
+  }, [ease, lagFactor, size, theme, trail, colorsProp]);
 
   return <canvas ref={canvasRef} className="net-canvas" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", display: "block" }} />;
 }

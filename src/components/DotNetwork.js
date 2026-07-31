@@ -123,7 +123,7 @@ export default function DotNetwork({
       cancelAnimationFrame(rafRef.current);
       window.removeEventListener("resize", resize);
     };
-  }, [density, nodeColor, nodeRadius, lineColor, linkDistance, maxConnections]);
+  }, [density, nodeColor, nodeRadius, lineColor, linkDistance, maxConnections, attract, attractStrength]);
 
   // Mouse and clicks via window to stay responsive even when canvas is covered
   useEffect(() => {

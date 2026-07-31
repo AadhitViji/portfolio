@@ -7,7 +7,6 @@ import Experience from '../components/Experience';
 import Education from '../components/Education';
 import Skills from '../components/Skills';
 import FluidField from '../components/FluidField';
-import FluidSim from '../components/FluidSim';
 import CursorAura from '../components/CursorAura';
 import GooeyBlob from '../components/GooeyBlob';
 

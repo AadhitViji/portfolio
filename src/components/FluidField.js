@@ -109,7 +109,7 @@ export default function FluidField({
       window.removeEventListener("mousemove", onMove);
       window.removeEventListener("mouseout", onOut);
     };
-  }, [colors, fade, spawnRate, maxRadius]);
+  }, [colors, fade, spawnRate, maxRadius, backgroundTint]);
 
   return (
     <div className="net-wrap">
